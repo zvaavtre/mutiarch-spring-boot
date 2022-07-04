@@ -1,3 +1,15 @@
+#
+# minimal example of how to use docker buildx to get a multi platform image with a little spring
+# boot app.
+#
+
+PHONY: usage
+
+usage:
+	$(info Build the docker image for arm64: > make build-arm-load)
+	$(info Run the image:                    > make run-example)
+
+
 
 jar:
 	mvn package -DskipTests
@@ -18,8 +30,16 @@ build-arm-load: jar
 buildx-du:
 	docker buildx du
 
-buildx-prune:
-	docker buildx prune
+buildx-clean:
+	docker buildx prune -f
+
+mvn-clean:
+	mvn clean
+
+
+clean: mvn-clean buildx-clean
+
+
 
 run-example:
 	# See the docker.env for a good way to load env vars
