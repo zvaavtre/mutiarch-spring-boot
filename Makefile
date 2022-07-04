@@ -21,7 +21,6 @@ buildx-du:
 buildx-prune:
 	docker buildx prune
 
-
 run-example:
 	# See the docker.env for a good way to load env vars
 	docker run -p 8080:8080 --env-file docker.env --rm --name spring-demo spring-demo
